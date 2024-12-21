@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Store the article data in localStorage
                     localStorage.setItem('selectedArticle', JSON.stringify(item));
                     // Navigate to the full blog page
-                    window.location.href = '/pages/blog/blog_full.html';
+                    window.location.href = '/fullblog';
                 });
 
                 blogDiv.appendChild(title);

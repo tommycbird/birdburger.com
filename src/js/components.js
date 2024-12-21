@@ -41,8 +41,8 @@ function loadIonicons() {
 document.addEventListener('DOMContentLoaded', () => {
     // Load Header and Footer
     Promise.all([
-        loadComponent('header', '/pages/margins/header.html'),
-        loadComponent('footer', '/pages/margins/footer.html')
+        loadComponent('header', '/margins/header.html'),
+        loadComponent('footer', '/margins/footer.html')
     ]).then(() => {
         // After header is loaded, load Ionicons scripts
         loadIonicons();
