@@ -1,14 +1,35 @@
 <!-- index.hmtl -->
-<!-- Initial page, contains the blog -->
-
-<!-- index.html -->
+<!-- Scrape medium articles from https://medium.com/feed/tag/birdburger -->
+<!-- Parse each article with js and list them with pages/blog/blog_instance.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=pages/blog/blog.html" />
-    <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <title>BirdBurger</title>
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+    <!-- Ionicons CDN -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="pages/blog/blog.html">link to the blog</a>.</p>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <div id="blog-list"></div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Include the centralized components script -->
+    <script src="/src/js/components.js"></script>
+
+    <!-- Blog JavaScript -->
+    <script src="/src/js/blog.js"></script>
 </body>
 </html>
+

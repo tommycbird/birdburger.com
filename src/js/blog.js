@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rss2jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
 
     // Function to fetch and display blogs
-    fetch(rss2jsonApi)
+    fetch(rss2jsonApi + `&nocache=${new Date().getTime()}`) // Adding cache-busting parameter
         .then(response => response.json())
         .then(data => {
             if (data.status !== 'ok') {
@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return false;
             });
+
+            // Clear existing blog list (if any)
+            blogList.innerHTML = '';
 
             // Check if there are no articles
             if (filteredItems.length === 0) {
