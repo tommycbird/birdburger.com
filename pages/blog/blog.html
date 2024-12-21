@@ -1,0 +1,33 @@
+<!-- pages/blog/blog.html -->
+<!-- Scrape medium articles from https://medium.com/feed/tag/birdburger -->
+<!-- Parse each article with js and list them with pages/blog/blog_instance.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BirdBurger</title>
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <!-- Ionicons CDN -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <h1>BirdBurger News</h1>
+        <div id="blog-list"></div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Include the centralized components script -->
+    <script src="/src/js/components.js"></script>
+
+    <!-- Blog JavaScript -->
+    <script src="/src/js/blog.js"></script>
+</body>
+</html>

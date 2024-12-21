@@ -1,0 +1,200 @@
+/* src/css/styles.css */
+
+/* CSS Variables */
+:root {
+    --nav-bg: rgb(50, 117, 242);
+    --body-bg: #f2f2f2;
+    --text-color: white;
+    --footer-background: rgb(0, 1, 76);
+    --header-height: 80px;
+    --font-family: Arial, sans-serif;
+}
+
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--body-bg);
+    color: #333;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+/* ============================================================ */
+/* ===================== HEADER + NAV ========================= */
+/* ============================================================ */
+
+/* Header Styles */
+header {
+    background-color: var(--nav-bg);
+    color: var(--text-color);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* New Left Section */
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Adjust spacing between logo and nav as needed */
+}
+
+.logo img {
+    height: 70px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+    position: relative;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav ul li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--nav-bg);
+    min-width: 150px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Social Icons */
+.social-icons a {
+    margin-left: 10px;
+    color: var(--text-color);
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    opacity: 0.7;
+}
+
+/* ============================================================ */
+/* ===================== FOOTER =============================== */
+/* ============================================================ */
+
+/* Footer Styles */
+footer {
+    background-color: var(--footer-background);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* ============================================================ */
+/* ===================== MAIN CONTENT ========================= */
+/* ============================================================ */
+
+/* Main Content Padding to prevent overlap with fixed footer */
+main {
+    padding: 30px 20px 60px; /* top padding to account for header, bottom for footer */
+}
+
+
+/* ============================================================ */
+/* ======================== BLOG ============================== */
+/* ============================================================ */
+
+/* Blog List Styles */
+#blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.blog-instance {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.blog-instance h2 {
+    margin-bottom: 10px;
+}
+
+.blog-instance p {
+    margin-bottom: 10px;
+}
+
+.blog-instance a {
+    color: var(--nav-bg);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.blog-instance a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* RESPONSIVITY */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Shrink nav text */
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    .social-icons {
+        margin-top: 10px;
+    }
+}
