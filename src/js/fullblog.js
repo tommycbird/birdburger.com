@@ -1,4 +1,4 @@
-// src/js/blog_full.js
+// src/js/fullblog.js
 // Display the full blog post based on the selected article
 
 document.addEventListener('DOMContentLoaded', () => {
