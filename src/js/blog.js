@@ -1,84 +1,90 @@
 // src/js/blog.js
-// Load and display Medium blogs from RSS feed, filtered by approved authors
-
+// Loads in notion blogs from the Notion API and displays them on the blog page
 document.addEventListener('DOMContentLoaded', () => {
     const blogList = document.getElementById('blog-list');
 
-    // Approved authors list
-    const approvedAuthors = ['tommycbird', 'ddaugbjerg'];
+    const CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
+    const NOTION_API_URL = `https://api.notion.com/v1/databases/164642b6-35d9-8064-b6a9-d15f3f0228f4/query`;
+    const NOTION_API_KEY = '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';
 
-    // Medium RSS feed URL
-    const rssFeedUrl = 'https://medium.com/feed/tag/birdburger';
-
-    // rss2json API endpoint (you can get a free API key from rss2json.com if needed)
-    const rss2jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-
-    // Function to fetch and display blogs
-    fetch(rss2jsonApi + `&nocache=${new Date().getTime()}`) // Adding cache-busting parameter
-        .then(response => response.json())
-        .then(data => {
-            if (data.status !== 'ok') {
-                throw new Error('Failed to fetch RSS feed');
-            }
-
-            const items = data.items;
-
-            // Filter items by approved authors
-            const filteredItems = items.filter(item => {
-                // Extract username from the link
-                // Example link: https://medium.com/@ddaugbjerg/test-post-67fbbdb79a27
-                const linkParts = item.link.split('/');
-                const usernamePart = linkParts.find(part => part.startsWith('@'));
-                if (usernamePart) {
-                    const username = usernamePart.substring(1); // Remove '@'
-                    return approvedAuthors.includes(username.toLowerCase());
-                }
-                return false;
+    // Fetch and display blog posts
+    async function fetchBlogPosts() {
+        try {
+            const response = await fetch(`${CORS_PROXY}${NOTION_API_URL}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${NOTION_API_KEY}`,
+                    'Notion-Version': '2022-06-28',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "filter": {
+                        "property": "Live",
+                        "checkbox": {
+                            "equals": true
+                        }
+                    },
+                    "sorts": [
+                        {
+                            "property": "Date",
+                            "direction": "descending"
+                        }
+                    ]
+                })
             });
 
-            // Clear existing blog list (if any)
-            blogList.innerHTML = '';
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
-            // Check if there are no articles
-            if (filteredItems.length === 0) {
-                blogList.innerHTML = '<p>No articles found for the approved authors.</p>';
+            const data = await response.json();
+            return data.results;
+        } catch (error) {
+            console.error('Error fetching blog posts:', error);
+            throw error;
+        }
+    }
+
+    async function displayBlogPosts() {
+        try {
+            const posts = await fetchBlogPosts();
+            if (posts.length === 0) {
+                blogList.innerHTML = '<p>No live articles found.</p>';
                 return;
             }
 
-            // Display each filtered blog
-            filteredItems.forEach(item => {
-                const blogDiv = document.createElement('div');
-                blogDiv.classList.add('blog-instance');
+            posts.forEach(post => {
+                const slug = post.properties.Slug.rich_text[0].text.content;
+                const thumbnail = post.properties.Thumbnail.files[0].file.url;
+                const date = post.properties.Date.date.start;
 
-                const title = document.createElement('h2');
-                title.textContent = item.title;
+                const blogItem = document.createElement('div');
+                blogItem.classList.add('blog-instance');
 
-                const text = document.createElement('p');
-                // Extract the snippet from the description
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = item.description;
-                const snippet = tempDiv.querySelector('.medium-feed-snippet')?.textContent || 'No preview available.';
-                text.textContent = snippet;
+                blogItem.innerHTML = `
+                    <img src="${thumbnail}" alt="${slug}" class="blog-thumbnail" />
+                    <div class="blog-content">
+                        <div class="blog-header">
+                            <h2 class="blog-title">${post.properties.Post.title[0].text.content}</h2>
+                            <span class="blog-date">${new Date(date).toLocaleDateString()}</span>
+                        </div>
+                        <p class="blog-slug">${slug}</p>
+                        <button class="read-more-button" onclick="readMore('${post.id}')">Read more</button>
+                    </div>
+                `;
 
-                const readMore = document.createElement('button');
-                readMore.textContent = 'Read more';
-                readMore.classList.add('read-more-button');
-                readMore.addEventListener('click', () => {
-                    // Store the article data in localStorage
-                    localStorage.setItem('selectedArticle', JSON.stringify(item));
-                    // Navigate to the full blog page
-                    window.location.href = '/fullblog';
-                });
-
-                blogDiv.appendChild(title);
-                blogDiv.appendChild(text);
-                blogDiv.appendChild(readMore);
-
-                blogList.appendChild(blogDiv);
+                blogList.appendChild(blogItem);
             });
-        })
-        .catch(error => {
-            console.error('Error fetching the RSS feed:', error);
-            blogList.innerHTML = '<p>Failed to load blog posts. Please try again later.</p>';
-        });
+        } catch (error) {
+            console.error('Error displaying blog posts:', error);
+            blogList.innerHTML = '<p>Failed to load blog posts.</p>';
+        }
+    }
+
+    window.readMore = function(postId) {
+        localStorage.setItem('selectedPostId', postId);
+        window.location.href = '/fullblog/index.html';
+    }
+
+    displayBlogPosts();
 });
