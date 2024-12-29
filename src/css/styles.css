@@ -218,15 +218,16 @@ main {
 }
 
 .page-container {
+    position: relative;
     background-color: var(--blog-background);
     border-radius: var(--blog-border-radius);
     box-shadow: 0px 0px 10px var(--blog-shadow), 10px 10px 0px var(--blue-clear);
-    min-height: 100vh;
+    min-height: 70vh;
     overflow: hidden;
     padding: 20px;
     /* Offsets if needed for header/footer */
     margin-top: -10px;
-    margin-bottom: -10px;
+    margin-bottom: 10px;
 }
 
 
@@ -369,6 +370,14 @@ main {
     background-color: #f4f4f4;
     padding: 2px 4px;
     border-radius: 3px;
+}
+
+#post-date {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 0.9em;
+    color: var(--date-color);
 }
 
 /* RESPONSIVITY */

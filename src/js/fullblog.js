@@ -146,30 +146,26 @@ document.addEventListener('DOMContentLoaded', () => {
       return content;
     }
   
-    async function displayPost() {
-      const postId = localStorage.getItem('selectedPostId');
-      if (!postId) {
-        blogTitle.textContent = 'Post Not Found';
-        blogContent.innerHTML = '<p>No post selected.</p>';
-        return;
-      }
-  
-      try {
-        const post = await fetchPost(postId);
-        const title = post.properties.Post.title[0].text.content;
-  
-        blogTitle.textContent = title;
-  
-        const blocks = await fetchBlocks(postId);
-        const renderedBlocks = await renderBlocks(blocks);
-  
-        blogContent.innerHTML = renderedBlocks;
-      } catch (error) {
-        console.error('Error displaying post:', error);
-        blogTitle.textContent = 'Error';
-        blogContent.innerHTML = '<p>Failed to load the post.</p>';
-      }
+  async function displayPost() {
+    const postId = localStorage.getItem('selectedPostId');
+    if (!postId) return;
+    try {
+      const post = await fetchPost(postId);
+      const title = post.properties.Post.title[0].text.content;
+      const date = post.properties.Date.date.start;
+
+      blogTitle.textContent = title;
+      const blogTimestamp = document.getElementById('post-date');
+      blogTimestamp.textContent = new Date(date).toLocaleString(); // Adjust format if needed
+
+      const blocks = await fetchBlocks(postId);
+      const renderedBlocks = await renderBlocks(blocks);
+      blogContent.innerHTML = renderedBlocks;
+    } catch (error) {
+      console.error(error);
     }
+  }
+
   
     displayPost();
   });
