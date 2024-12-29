@@ -1,13 +1,50 @@
 /* src/css/styles.css */
 
+/* FONT FILES */
+
+/* HandyCasual Font */
+@font-face {
+    font-family: 'HandyCasual';
+    src: url('/src/font/handycasual/HandyCasual.ttf') format('truetype'),
+         url('/src/font/handycasual/HandyCasual2.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Poppins Font - Regular */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/src/font/poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Poppins Font - Bold */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/src/font/poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Poppins Font - Italic */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/src/font/poppins/Poppins-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
 /* CSS Variables */
 :root {
     --nav-bg: rgb(50, 117, 242);
+    --blue-clear: rgb(50, 117, 242, 0.5);
     --body-bg: #f2f2f2;
     --text-color: white;
     --footer-background: rgb(0, 1, 76);
     --header-height: 100px;
-    --font-family: Arial, sans-serif;
+    --font-header: 'HandyCasual', sans-serif;
+    --font-main: 'Poppins', sans-serif;
     --blog-background: #fff;
     --blog-shadow: rgba(0,0,0,0.1);
     --blog-border-radius: 10px;
@@ -27,10 +64,14 @@
 }
 
 body {
-    font-family: var(--font-family);
-    background-color: var(--body-bg);
+    font-family: var(--font-main);
+    background-color: var(--body-bg); /* Default background color as fallback */
+    background-image: url('/src/img/bg_tile.png');
+    background-size: 100% auto; /* Full width, maintain aspect ratio */
+    background-repeat: repeat-y; /* Repeat vertically */
     color: #333;
 }
+
 
 h1 {
     margin-bottom: 30px;
@@ -57,11 +98,14 @@ h3 {
 /* Header Styles */
 header {
     background-color: var(--nav-bg);
+    /* font-family: var(--font-header); */
     color: var(--text-color);
     height: var(--header-height);
     display: flex;
     align-items: center;
     padding: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .header-container {
@@ -169,6 +213,8 @@ footer a:hover {
 /* Main Content Padding to prevent overlap with fixed footer */
 main {
     padding: 30px 20px 80px; /* top padding to account for header, bottom for footer */
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 
@@ -190,15 +236,16 @@ main {
     background-color: var(--blog-background);
     padding: 15px;
     border-radius: var(--blog-border-radius);
-    box-shadow: 0 0 10px var(--blog-shadow);
-    height: 150px; /* fixed height */
+    box-shadow: 5px 5px 0px var(--blue-clear);
+    height: 150px;
 }
 
 .blog-thumbnail {
-    width: 120px;
-    height: 120px;
+    width: 12%;
+    height: 100%;
     object-fit: cover;
     border-radius: var(--blog-border-radius);
+    box-shadow: 2px 2px 5px;
     margin-right: 20px;
 }
 
