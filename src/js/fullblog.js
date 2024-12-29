@@ -156,7 +156,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       blogTitle.textContent = title;
       const blogTimestamp = document.getElementById('post-date');
-      blogTimestamp.textContent = new Date(date).toLocaleString(); // Adjust format if needed
+      blogTimestamp.textContent = new Date(date).toLocaleString('en-US', {
+          month: '2-digit',
+          day: '2-digit',
+          year: 'numeric',
+          hour: 'numeric',
+          hour12: true
+      });
+    
 
       const blocks = await fetchBlocks(postId);
       const renderedBlocks = await renderBlocks(blocks);
