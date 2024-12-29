@@ -475,9 +475,11 @@ main {
 }
 
 .left img {
-    height: 70px;
+    max-height: 70px;
+    width: auto;
     border-radius: 10px;
 }
+
 
 /* Add to your existing CSS */
 .download-button {
