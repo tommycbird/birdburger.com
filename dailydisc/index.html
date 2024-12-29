@@ -1,33 +1,40 @@
 <!-- dailydisc/index.html -->
-<!-- Home page for Daily Disc -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Daily Disc</title>
     <link rel="stylesheet" href="/src/css/styles.css">
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
-    <!-- Ionicons CDN -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-    <!-- Header -->
     <div id="header"></div>
-
-    <!-- Main Content -->
+    
     <main>
         <div class="page-container">
-            <h1>Daily Disc</h1>
-            <p>Welcome to Daily Disc, our mobile game.</p>
+            <div class="disc-header">
+                <div class="left">
+                    <img src="/src/img/disc/app_icon.png" alt="Daily Disc Icon">
+                    <h1>Daily Disc</h1>
+                </div>
+                <a class="download-button" href="https://testflight.apple.com/join/6SVtXD6n">
+                    <ion-icon name="logo-apple"></ion-icon> Play Beta
+                </a>
+            </div>
+            <p>Welcome to Daily Disc, our first ever game, made for iOS with Godot.</p>
+            <h3>Features</h3>
+            <p>Simply drag back and launch the disc toward the goals, being careful to avoid obstacles. You can also curve your shots and do a mid-air double jump for extra precision.</p>
+            <p>There are infinite levels, since maps are randomly generated, but each day you get to make an attempt at the Daily Level. Compare your score with your friends to see who did best!</p>
+            <p>We hope to add in some more maps soon, but in the meantime you can collect multiple disc skins, and unlock a handful of achievements!</p>
+            <h3>Feedback</h3>
+            <p>We are currently in our open beta, and we hope to iterate on everyone's feedback so we can improve the game to its meet its potential. Thanks for trying it out!</p>
+
         </div>
     </main>
 
-    <!-- Footer -->
     <div id="footer"></div>
-
-    <!-- Include the centralized components script -->
     <script src="/src/js/components.js"></script>
 </body>
 </html>
