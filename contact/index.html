@@ -1,0 +1,151 @@
+<!-- contact/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - BirdBurger</title>
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <base href="https://birdburger.com/">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <style>
+    /* Specific contact form styles */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #444;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: var(--font-main);
+      font-size: 1em;
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-button {
+      background-color: var(--nav-bg);
+      color: var(--text-color);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    
+    .submit-button:hover {
+      background-color: var(--read-more-hover-bg);
+    }
+    
+    .success-message {
+      display: none;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    
+    .error-message {
+      display: none;
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="page-container">
+      <h1>Contact Us</h1>
+      <p>Have questions or feedback about our games? Want to collaborate with us? Send us a message using the form below, and we'll get back to you as soon as possible.</p>
+      
+      <div class="contact-form">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms Access Key -->
+          <input type="hidden" name="access_key" value="8d5bdbfe-4fbd-4f87-8182-2f7e2eda572a">
+          
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-control" required></textarea>
+          </div>
+          
+          <!-- Honeypot Spam Protection -->
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+          
+          <!-- Optional: Redirect URL after submission -->
+          <!-- <input type="hidden" name="redirect" value="https://birdburger.com/contact/thanks.html"> -->
+          
+          <!-- Optional: Include subject line to make it easier to organize emails -->
+          <input type="hidden" name="from_name" value="BirdBurger Contact Form">
+          
+          <button type="submit" class="submit-button">
+            <ion-icon name="send-outline"></ion-icon> Send Message
+          </button>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+          <ion-icon name="checkmark-circle-outline"></ion-icon> Your message has been sent successfully! We'll get back to you soon.
+        </div>
+        
+        <div id="errorMessage" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon> There was a problem sending your message. Please try again later.
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="footer"></div>
+  <script src="/src/js/components.js"></script>
+  
+  <!-- Form submission handling script -->
+  <script>
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    form.addEventListener('submit', function(e) {
+      // Reset messages
+      successMessage.style.display = 'none';
+      errorMessage.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
